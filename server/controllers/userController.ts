@@ -115,20 +115,22 @@ export const getDashboardData = asyncHandler(async (req: AuthRequest, res: Respo
             type: 'expense' as const,
             title: e.description,
             amount: Number(e.amount),
-            date: e.created_at,
-            user: e.users?.username || 'Unknown',
-            group: e.groups?.name || 'Unknown'
+            created_at: e.created_at,
+            paid_by_username: e.users?.username || 'Unknown',
+            paid_by_id: e.payer_id,
+            group_name: e.groups?.name || 'Unknown'
         })),
         ...latestSettlements.map((s: any) => ({
             id: s.id,
             type: 'settlement' as const,
             title: 'Settlement',
             amount: Number(s.amount),
-            date: s.settled_at,
-            user: s.users_settlements_sender_idTousers?.username || 'Unknown',
-            group: s.groups?.name || 'Unknown'
+            created_at: s.settled_at,
+            paid_by_username: s.users_settlements_sender_idTousers?.username || 'Unknown',
+            paid_by_id: s.sender_id,
+            group_name: s.groups?.name || 'Unknown'
         }))
-    ].sort((a, b) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime()).slice(0, 5);
+    ].sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime()).slice(0, 10);
 
     // 4. Calculate Individual Balances for all members of all groups
     const allTransactions: any[] = [];
