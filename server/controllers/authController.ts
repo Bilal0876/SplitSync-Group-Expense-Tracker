@@ -47,10 +47,12 @@ export const register = asyncHandler(async (req: Request, res: Response): Promis
           { expiresIn: '7d' }
      );
 
+     const isProduction = process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT === 'production';
+
      const cookieOptions = {
           httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'lax' as const,
+          secure: true, // Always true for cross-site cookies
+          sameSite: 'none' as const,
           maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
      };
      console.log('Setting cookie with options:', cookieOptions);
@@ -92,10 +94,12 @@ export const login = asyncHandler(async (req: Request, res: Response): Promise<R
           { expiresIn: '7d' }
      );
 
+     const isProduction = process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT === 'production';
+
      const cookieOptions = {
           httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'lax' as const,
+          secure: true, // Always true for cross-site cookies
+          sameSite: 'none' as const,
           maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
      };
      console.log('Setting cookie with options:', cookieOptions);
@@ -108,6 +112,10 @@ export const login = asyncHandler(async (req: Request, res: Response): Promise<R
 });
 
 export const logout = asyncHandler(async (req: any, res: any) => {
-     res.clearCookie('token');
+     res.clearCookie('token', {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none'
+     });
      res.status(200).json({ message: 'Logged out successfully' });
 });
