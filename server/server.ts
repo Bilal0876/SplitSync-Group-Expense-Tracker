@@ -20,7 +20,21 @@ app.set('trust proxy', 1);
 app.use(cookieParser());
 app.use(helmet());
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: (origin, callback) => {
+        const allowed = process.env.FRONTEND_URL;
+        if (!origin || !allowed) return callback(null, true);
+        
+        // Remove trailing slashes for comparison
+        const normalizedOrigin = origin.replace(/\/$/, '');
+        const normalizedAllowed = allowed.replace(/\/$/, '');
+        
+        if (normalizedOrigin === normalizedAllowed || allowed === '*') {
+            callback(null, true);
+        } else {
+            console.warn(`CORS blocked for origin: ${origin}. Expected: ${allowed}`);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
 }));
 app.use(express.json());
