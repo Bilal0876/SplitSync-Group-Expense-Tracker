@@ -4,7 +4,8 @@
   "main": "server.ts",
   "type": "module",
   "scripts": {
-    "start": "node server.ts",
+    "build": "npx prisma generate",
+    "start": "npx tsx server.ts",
     "dev": "nodemon --exec npx tsx server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,7 +23,8 @@
     "express-rate-limit": "^8.3.1",
     "express-validator": "^7.3.1",
     "helmet": "^8.1.0",
-    "jsonwebtoken": "^9.0.3"
+    "jsonwebtoken": "^9.0.3",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
