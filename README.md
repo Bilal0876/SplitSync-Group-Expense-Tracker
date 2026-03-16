@@ -1,4 +1,4 @@
-# 💰 Split-Sync | Group Expense Management
+# Split-Sync | Group Expense Management
 
 **SplitSync** is a premium, full-stack expense tracking application designed for teams, roommates, and friend groups. It simplifies the headache of splitting bills, tracking who owes whom, and settling debts with a sleek, high-performance interface.
 
@@ -6,18 +6,18 @@
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-- **📊 Intelligent Dashboard**: Gain an instant overview of your net balance, active groups, and recent spending trends.
-- **👥 Group Collaboration**: Create dedicated spaces for trips, households, or events. Manage members and track shared costs seamlessly.
-- **💸 Automated Splitting**: Add expenses and let Split-Sync handle the math. Supports equal splits with high financial precision.
-- **🤝 Smart Settlements**: Our internal engine calculates the most efficient way to pay back your peers with minimal transactions.
-- **🔒 Security by Design**: Built with **HttpOnly Cookies** and **JWT** to ensure your session is always safe from XSS attacks.
-- **📱 Premium UX**: A responsive, modern design system built with **Tailwind CSS 4** and **Plus Jakarta Sans**.
+- ** Intelligent Dashboard**: Gain an instant overview of your net balance, active groups, and recent spending trends.
+- ** Group Collaboration**: Create dedicated spaces for trips, households, or events. Manage members and track shared costs seamlessly.
+- ** Automated Splitting**: Add expenses and let Split-Sync handle the math. Supports equal splits with high financial precision.
+- ** Smart Settlements**: Our internal engine calculates the most efficient way to pay back your peers with minimal transactions.
+- ** Security by Design**: Built with **HttpOnly Cookies** and **JWT** to ensure your session is always safe from XSS attacks.
+- ** Premium UX**: A responsive, modern design system built with **Tailwind CSS 4** and **Plus Jakarta Sans**.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 - **React 19 (Vite)**: Lightning-fast, component-based architecture.
@@ -33,7 +33,7 @@
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 Split-Sync leverages a **Secure Proxy Architecture** to ensure production stability:
 1. **Frontend (Vercel)** serves the UI and proxies API requests to the backend.
@@ -42,7 +42,7 @@ Split-Sync leverages a **Secure Proxy Architecture** to ensure production stabil
 
 ---
 
-## 🚦 Getting Started (Local Development)
+##  Getting Started (Local Development)
 
 ### 1. Prerequisites
 - Node.js (v20+)
@@ -88,11 +88,11 @@ npm run dev
 
 ---
 
-## 🛡️ Security Note
+##  Security Note
 The production deployment uses a **Vercel Proxy** to bridge the frontend and backend. This allows for **HttpOnly Cookies** to be used across domains, which is the industry standard for preventing session hijacking.
 
 ---
 
-## 📄 License
+##  License
 This project is for educational and personal use. Feel free to build upon it! ✨
 
