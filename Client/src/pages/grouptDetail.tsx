@@ -69,11 +69,11 @@ const Avatar = ({ name, size = 'md' }: { name: string; size?: 'sm' | 'md' | 'lg'
 };
 
 const Skeleton = ({ className }: { className: string }) => (
-     <div className={`bg-gray-100 rounded-xl animate-pulse ${className}`} />
+     <div className={`bg-gray-100 dark:bg-gray-800 rounded-xl animate-pulse ${className}`} />
 );
 
 const ExpenseSkeleton = () => (
-     <li className="flex items-center gap-4 px-5 py-4 border-b border-gray-50 last:border-0">
+     <li className="flex items-center gap-4 px-5 py-4 border-b border-gray-50 dark:border-gray-800 last:border-0">
           <Skeleton className="w-10 h-10 rounded-xl flex-shrink-0" />
           <div className="flex-1 space-y-2">
                <Skeleton className="h-3.5 w-2/3" />
@@ -100,12 +100,10 @@ const AddExpenseModal = ({ groupId, onClose, onSuccess }: AddExpenseModalProps) 
      const [error, setError] = useState('');
      const titleRef = useRef<HTMLInputElement>(null);
 
-     // Focus title on mount
      useEffect(() => {
           titleRef.current?.focus();
      }, []);
 
-     // Close on Escape
      useEffect(() => {
           const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
           window.addEventListener('keydown', handler);
@@ -136,50 +134,41 @@ const AddExpenseModal = ({ groupId, onClose, onSuccess }: AddExpenseModalProps) 
      };
 
      return (
-          /* Backdrop */
           <div
                className="fixed inset-0 z-50 flex items-center justify-center p-4"
                style={{ animation: 'backdropIn 0.2s ease both' }}
           >
-               {/* Dimmed overlay */}
                <div
                     className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm"
                     onClick={onClose}
                />
-
-               {/* Modal panel */}
                <div
-                    className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl shadow-violet-500/10 overflow-hidden"
+                    className="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-3xl shadow-2xl shadow-violet-500/10 overflow-hidden"
                     style={{ animation: 'modalIn 0.3s cubic-bezier(0.16,1,0.3,1) both' }}
                >
-
-                    {/* Header */}
-                    <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-gray-100">
+                    <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-gray-100 dark:border-gray-800">
                          <div className="flex items-center gap-3">
                               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center shadow shadow-violet-500/30">
                                    <Icon path={ICONS.receipt} className="size-4 text-white" />
                               </div>
                               <div>
-                                   <h2 className="text-base font-extrabold text-gray-900 tracking-tight">Add Expense</h2>
-                                   <p className="text-xs text-gray-400 mt-0.5">Split a new cost with the group</p>
+                                   <h2 className="text-base font-extrabold text-gray-900 dark:text-white tracking-tight">Add Expense</h2>
+                                   <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Split a new cost with the group</p>
                               </div>
                          </div>
                          <button
                               type="button"
                               onClick={onClose}
-                              className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all cursor-pointer"
+                              className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all cursor-pointer"
                          >
                               <Icon path={ICONS.close} className="size-4" />
                          </button>
                     </div>
 
-                    {/* Form */}
                     <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
-
-                         {/* Title field */}
                          <div className="space-y-1.5">
-                              <label htmlFor="expense-title" className="text-xs font-semibold text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
-                                   <Icon path={ICONS.tag} className="size-3.5 text-gray-300" />
+                              <label htmlFor="expense-title" className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
+                                   <Icon path={ICONS.tag} className="size-3.5 text-gray-300 dark:text-gray-600" />
                                    Title
                               </label>
                               <input
@@ -190,18 +179,17 @@ const AddExpenseModal = ({ groupId, onClose, onSuccess }: AddExpenseModalProps) 
                                    value={title}
                                    onChange={e => { setTitle(e.target.value); setError(''); }}
                                    required
-                                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-300 text-sm outline-none focus:border-violet-500 focus:bg-violet-50/40 transition-all"
+                                   className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-800 dark:text-gray-100 placeholder-gray-300 dark:placeholder-gray-600 text-sm outline-none focus:border-violet-500 focus:bg-violet-50/40 dark:focus:bg-violet-900/10 transition-all"
                               />
                          </div>
 
-                         {/* Amount field */}
                          <div className="space-y-1.5">
-                              <label htmlFor="expense-amount" className="text-xs font-semibold text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
-                                   <Icon path={ICONS.dollar} className="size-3.5 text-gray-300" />
+                              <label htmlFor="expense-amount" className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
+                                   <Icon path={ICONS.dollar} className="size-3.5 text-gray-300 dark:text-gray-600" />
                                    Amount
                               </label>
                               <div className="relative">
-                                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400 pointer-events-none">$</span>
+                                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400 dark:text-gray-500 pointer-events-none">$</span>
                                    <input
                                         id="expense-amount"
                                         type="number"
@@ -211,27 +199,25 @@ const AddExpenseModal = ({ groupId, onClose, onSuccess }: AddExpenseModalProps) 
                                         value={amount}
                                         onChange={e => { setAmount(e.target.value); setError(''); }}
                                         required
-                                        className="w-full pl-8 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-300 text-sm outline-none focus:border-violet-500 focus:bg-violet-50/40 transition-all"
+                                        className="w-full pl-8 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-800 dark:text-gray-100 placeholder-gray-300 dark:placeholder-gray-600 text-sm outline-none focus:border-violet-500 focus:bg-violet-50/40 dark:focus:bg-violet-900/10 transition-all"
                                    />
                               </div>
                          </div>
 
-                         {/* Error message */}
                          {error && (
                               <p
-                                   className="text-xs text-red-400 bg-red-50 border border-red-100 rounded-xl px-4 py-2.5"
+                                   className="text-xs text-red-500 font-bold bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-xl px-4 py-2.5"
                                    style={{ animation: 'popIn 0.25s cubic-bezier(0.16,1,0.3,1) both' }}
                               >
                                    {error}
                               </p>
                          )}
 
-                         {/* Actions */}
                          <div className="flex items-center gap-3 pt-1">
                               <button
                                    type="button"
                                    onClick={onClose}
-                                   className="flex-1 py-3 rounded-xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all cursor-pointer"
+                                   className="flex-1 py-3 rounded-xl text-sm font-semibold bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all cursor-pointer"
                               >
                                    Cancel
                               </button>
@@ -269,22 +255,22 @@ const LeaveGroupModal = ({ groupName, onClose, onConfirm, loading }: LeaveGroupM
      return (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4"
                style={{ animation: 'backdropIn 0.2s ease both' }}>
-               <div className="absolute inset-0 bg-gray-900/50 backdrop-blur-md" onClick={onClose} />
-               <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl shadow-red-500/10 overflow-hidden"
+               <div className="absolute inset-0 bg-gray-900/50 dark:bg-black/60 backdrop-blur-md" onClick={onClose} />
+               <div className="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-3xl shadow-2xl shadow-red-500/10 overflow-hidden"
                     style={{ animation: 'modalIn 0.3s cubic-bezier(0.16,1,0.3,1) both' }}>
                     <div className="px-7 py-8 text-center">
                          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center mx-auto mb-5">
                               <Icon path={ICONS.leave} className="size-8 text-red-500" />
                          </div>
-                         <h2 className="text-lg font-extrabold text-gray-900 tracking-tight">Leave Group?</h2>
-                         <p className="text-sm text-gray-400 mt-3 leading-relaxed max-w-xs mx-auto">
-                              Are you sure you want to leave <span className="font-semibold text-gray-600">"{groupName}"</span>?
+                         <h2 className="text-lg font-extrabold text-gray-900 dark:text-white tracking-tight">Leave Group?</h2>
+                         <p className="text-sm text-gray-400 dark:text-gray-500 mt-3 leading-relaxed max-w-xs mx-auto">
+                              Are you sure you want to leave <span className="font-semibold text-gray-600 dark:text-gray-300">"{groupName}"</span>?
                               You will no longer be able to see expenses or balances for this group.
                          </p>
 
                          <div className="flex items-center gap-3 mt-8">
                               <button type="button" onClick={onClose}
-                                   className="flex-1 py-3.5 rounded-xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all cursor-pointer">
+                                   className="flex-1 py-3.5 rounded-xl text-sm font-semibold bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all cursor-pointer">
                                    Cancel
                               </button>
                               <button type="button" onClick={onConfirm} disabled={loading}
@@ -301,7 +287,7 @@ const LeaveGroupModal = ({ groupName, onClose, onConfirm, loading }: LeaveGroupM
      );
 };
 
-//Main Component
+// Main Component
 const GroupDetail = () => {
      const { id } = useParams<{ id: string }>();
      const navigate = useNavigate();
@@ -310,28 +296,21 @@ const GroupDetail = () => {
      const [loading, setLoading] = useState(true);
      const [error, setError] = useState('');
 
-     // Expenses
      const [expenses, setExpenses] = useState<Expense[]>([]);
      const [expensesLoading, setExpensesLoading] = useState(true);
      const [expensesError, setExpensesError] = useState('');
 
-     // Add member
      const [memberEmail, setMemberEmail] = useState('');
      const [addingMember, setAddingMember] = useState(false);
      const [addMemberError, setAddMemberError] = useState('');
      const [addMemberSuccess, setAddMemberSuccess] = useState(false);
 
-     // Add expense modal
      const [showExpenseModal, setShowExpenseModal] = useState(false);
-
-     // Edit / Delete expense modals (rendered at page root level)
      const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
      const [deletingExpense, setDeletingExpense] = useState<Expense | null>(null);
 
-     // Leave group modal
      const [showLeaveModal, setShowLeaveModal] = useState(false);
      const [leavingGroup, setLeavingGroup] = useState(false);
-
 
      const { user } = useAuth();
 
@@ -342,15 +321,14 @@ const GroupDetail = () => {
           api.get(`/groups/${id}`)
                .then(res => setGroup(res.data))
                .catch(err => {
-                   if (err?.response?.status === 401) return; // Silent 401 during logout
+                   if (err?.response?.status === 401) return;
                    setError(err?.response?.data?.error ?? 'Failed to load group.');
                })
                .finally(() => setLoading(false));
      }, [id, user]);
 
-     // Fetch expenses
-      const fetchExpenses = () => {
-           if (!id || !user) return;
+     const fetchExpenses = () => {
+          if (!id || !user) return;
           setExpensesLoading(true);
           setExpensesError('');
           api.get(`/groups/${id}/expenses`)
@@ -362,20 +340,17 @@ const GroupDetail = () => {
                .finally(() => setExpensesLoading(false));
      };
 
-
-      useEffect(() => {
-           if (id && user) {
-                fetchExpenses();
-           }
-      }, [id, user]);
-
+     useEffect(() => {
+          if (id && user) {
+               fetchExpenses();
+          }
+     }, [id, user]);
 
      const handleAddMember = async (e: React.FormEvent) => {
           e.preventDefault();
           const email = memberEmail.trim();
           if (!email) return;
 
-          // Frontend validation: Check if user already exists in group members
           if (group?.members.some(m => m.email.toLowerCase() === email.toLowerCase())) {
                setAddMemberError('User is already in this group.');
                return;
@@ -386,8 +361,6 @@ const GroupDetail = () => {
           setAddMemberSuccess(false);
           try {
                await api.post(`/groups/${id}/members`, { email });
-               // Note: We don't add the member to the local state yet!
-               // They are only added once they accept the invitation.
                setMemberEmail('');
                setAddMemberSuccess(true);
                setTimeout(() => setAddMemberSuccess(false), 2500);
@@ -398,7 +371,6 @@ const GroupDetail = () => {
           }
      };
 
-     // Remove member
      const handleRemoveMember = async (memberId: string) => {
           try {
                await api.delete(`/groups/${id}/members`, { data: { userId: memberId } });
@@ -423,11 +395,10 @@ const GroupDetail = () => {
 
      const totalSpend = expenses.reduce((sum, e) => sum + parseFloat(String(e.amount)), 0);
 
-     // Loading skeleton
      if (loading) return (
-          <div className="min-h-screen bg-gray-50/60 flex flex-col font-sans">
+          <div className="min-h-screen bg-gray-50/60 dark:bg-gray-950 flex flex-col font-sans transition-colors duration-300">
                <style>{`@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap'); * { font-family: 'Plus Jakarta Sans', sans-serif; }`}</style>
-               <header className="w-full bg-white/80 backdrop-blur-md border-b border-gray-100 px-6 py-3.5 flex items-center gap-3">
+               <header className="w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 px-6 py-3.5 flex items-center gap-3">
                     <Skeleton className="w-9 h-9 rounded-xl" />
                     <Skeleton className="w-28 h-5" />
                </header>
@@ -447,12 +418,11 @@ const GroupDetail = () => {
           </div>
      );
 
-     // Error state
      if (error) return (
-          <div className="min-h-screen bg-gray-50/60 flex flex-col items-center justify-center gap-4 font-sans">
+          <div className="min-h-screen bg-gray-50/60 dark:bg-gray-950 flex flex-col items-center justify-center gap-4 font-sans transition-colors duration-300">
                <style>{`@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap'); * { font-family: 'Plus Jakarta Sans', sans-serif; }`}</style>
-               <div className="bg-white border border-red-100 rounded-2xl p-8 shadow-sm text-center max-w-sm">
-                    <p className="text-sm text-red-400 bg-red-50 border border-red-100 rounded-xl px-4 py-3 mb-4">{error}</p>
+               <div className="bg-white dark:bg-gray-900 border border-red-100 dark:border-red-900/30 rounded-2xl p-8 shadow-sm text-center max-w-sm">
+                    <p className="text-sm text-red-400 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-xl px-4 py-3 mb-4">{error}</p>
                     <button type="button" onClick={() => navigate(-1)}
                          className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow shadow-violet-500/30 hover:opacity-90 transition cursor-pointer">
                          Go Back
@@ -462,7 +432,7 @@ const GroupDetail = () => {
      );
 
      return (
-          <div className="min-h-screen bg-gray-50/60 flex flex-col font-sans">
+          <div className="min-h-screen bg-gray-50/60 dark:bg-gray-950 flex flex-col font-sans transition-colors duration-300">
                <style>{`
                     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
                     * { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -473,6 +443,18 @@ const GroupDetail = () => {
                     @keyframes modalIn {
                          from { opacity: 0; transform: scale(0.94) translateY(12px); }
                          to   { opacity: 1; transform: scale(1) translateY(0); }
+                    }
+                    @keyframes fadeUp {
+                         from { opacity: 0; transform: translateY(16px); }
+                         to   { opacity: 1; transform: translateY(0); }
+                    }
+                    @keyframes slideIn {
+                         from { opacity: 0; transform: translateX(-8px); }
+                         to   { opacity: 1; transform: translateX(0); }
+                    }
+                    @keyframes popIn {
+                         from { opacity: 0; transform: scale(0.95); }
+                         to   { opacity: 1; transform: scale(1); }
                     }
                `}</style>
 
@@ -487,7 +469,7 @@ const GroupDetail = () => {
                     />
                )}
 
-               {/* Edit Expense Modal - rendered at page root for full-screen overlay */}
+               {/* Edit Expense Modal */}
                {editingExpense && (
                     <EditExpenseModal
                          expense={editingExpense}
@@ -496,7 +478,7 @@ const GroupDetail = () => {
                     />
                )}
 
-               {/* Delete Expense Modal - rendered at page root for full-screen overlay */}
+               {/* Delete Expense Modal */}
                {deletingExpense && (
                     <DeleteConfirmModal
                          expense={deletingExpense}
@@ -518,7 +500,7 @@ const GroupDetail = () => {
                <main className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 py-5 sm:py-8 space-y-4 sm:space-y-6">
 
                     {/* Group Hero */}
-                    <div className="relative bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden"
+                    <div className="relative bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden"
                          style={{ animation: 'fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.05s both' }}>
                          <div className="px-4 sm:px-6 py-4 sm:py-5 flex flex-col sm:flex-row items-start sm:justify-between gap-4">
                               <div className="flex items-center gap-4">
@@ -526,15 +508,15 @@ const GroupDetail = () => {
                                         <Icon path={ICONS.members} className="size-6 md:size-7 text-white" />
                                    </div>
                                    <div>
-                                        <h1 className="text-xl md:text-2xl font-extrabold text-gray-900 tracking-tight leading-tight">
+                                        <h1 className="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight">
                                              {group?.name}
                                         </h1>
                                         <div className="flex items-center gap-1.5 mt-1.5">
-                                             <Icon path={ICONS.calendar} className="size-3.5 text-gray-300" />
-                                             <span className="text-xs text-gray-400">
+                                             <Icon path={ICONS.calendar} className="size-3.5 text-gray-300 dark:text-gray-600" />
+                                             <span className="text-xs text-gray-400 dark:text-gray-500">
                                                   Created {group?.created_at
                                                        ? new Date(group.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-                                                       : 'â€”'}
+                                                       : '—'}
                                              </span>
                                         </div>
                                    </div>
@@ -542,7 +524,7 @@ const GroupDetail = () => {
                               <div className="flex items-center gap-4 flex-wrap sm:flex-nowrap">
                                    {expenses.length > 0 && (
                                         <div className="flex flex-col items-end">
-                                             <span className="text-xs text-gray-400 font-medium">Total spent</span>
+                                             <span className="text-xs text-gray-400 dark:text-gray-500 font-medium">Total spent</span>
                                              <span className="text-lg font-extrabold bg-gradient-to-r from-violet-600 to-indigo-500 bg-clip-text text-transparent">
                                                   ${totalSpend.toFixed(2)}
                                              </span>
@@ -551,17 +533,17 @@ const GroupDetail = () => {
                                    <div className="flex items-center gap-2">
                                         <div className="flex -space-x-2">
                                              {group?.members.slice(0, 4).map(m => (
-                                                  <div key={m.id} className="ring-2 ring-white rounded-full">
+                                                  <div key={m.id} className="ring-2 ring-white dark:ring-gray-900 rounded-full">
                                                        <Avatar name={m.username} size="sm" />
                                                   </div>
                                              ))}
                                              {(group?.members.length ?? 0) > 4 && (
-                                                  <div className="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-xs font-bold text-gray-500">
+                                                  <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 border-2 border-white dark:border-gray-950 flex items-center justify-center text-xs font-bold text-gray-500 dark:text-gray-400">
                                                        +{(group?.members.length ?? 0) - 4}
                                                   </div>
                                              )}
                                         </div>
-                                        <span className="text-sm text-gray-400 font-medium ml-1">
+                                        <span className="text-sm text-gray-400 dark:text-gray-500 font-medium ml-1">
                                              {group?.members.length ?? 0} member{(group?.members.length ?? 0) !== 1 ? 's' : ''}
                                         </span>
                                    </div>
@@ -569,23 +551,24 @@ const GroupDetail = () => {
                          </div>
                     </div>
 
-
+                    {/* Main Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-5 gap-6">
+
                          {/* Right: Expenses + Balances */}
                          <div className="lg:col-span-3 flex flex-col gap-4">
 
                               {/* Expenses Card */}
-                              <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden"
+                              <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden"
                                    style={{ animation: 'fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.18s both' }}>
 
-                                   <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-gray-50">
-                                        <h3 className="font-bold text-gray-800 text-sm flex items-center gap-2">
-                                             <span className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center">
-                                                  <Icon path={ICONS.receipt} className="size-4 text-indigo-500" />
+                                   <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-gray-50 dark:border-gray-800">
+                                        <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm flex items-center gap-2">
+                                             <span className="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center">
+                                                  <Icon path={ICONS.receipt} className="size-4 text-indigo-500 dark:text-indigo-400" />
                                              </span>
                                              Expenses
                                              {expenses.length > 0 && (
-                                                  <span className="text-xs font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+                                                  <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full">
                                                        {expenses.length}
                                                   </span>
                                              )}
@@ -606,7 +589,7 @@ const GroupDetail = () => {
 
                                    {!expensesLoading && expensesError && (
                                         <div className="px-5 py-6 text-center">
-                                             <p className="text-xs text-red-400 bg-red-50 border border-red-100 rounded-xl px-3 py-2 inline-block">
+                                             <p className="text-xs text-red-400 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-xl px-3 py-2 inline-block">
                                                   {expensesError}
                                              </p>
                                         </div>
@@ -615,16 +598,16 @@ const GroupDetail = () => {
                                    {!expensesLoading && !expensesError && expenses.length === 0 && (
                                         <div className="px-5 py-10 flex flex-col items-center justify-center text-center gap-3">
                                              <div className="relative">
-                                                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-50 to-indigo-50 flex items-center justify-center">
-                                                       <Icon path={ICONS.receipt} className="size-8 text-violet-300" />
+                                                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-900/10 dark:to-indigo-900/10 flex items-center justify-center">
+                                                       <Icon path={ICONS.receipt} className="size-8 text-violet-300 dark:text-violet-700" />
                                                   </div>
                                                   <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center shadow shadow-violet-500/30">
                                                        <Icon path={ICONS.add_expense} className="size-3.5 text-white" />
                                                   </div>
                                              </div>
                                              <div>
-                                                  <p className="text-sm font-semibold text-gray-700">No expenses yet</p>
-                                                  <p className="text-xs text-gray-400 mt-1">Add your first shared expense to get started.</p>
+                                                  <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">No expenses yet</p>
+                                                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Add your first shared expense to get started.</p>
                                              </div>
                                              <button
                                                   type="button"
@@ -649,8 +632,8 @@ const GroupDetail = () => {
                                                        />
                                                   ))}
                                              </ul>
-                                             <div className="px-5 py-3 bg-gray-50/60 border-t border-gray-100 flex items-center justify-between">
-                                                  <span className="text-xs text-gray-400 font-medium">
+                                             <div className="px-5 py-3 bg-gray-50/60 dark:bg-gray-800/40 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between transition-colors">
+                                                  <span className="text-xs text-gray-400 dark:text-gray-500 font-medium">
                                                        {expenses.length} expense{expenses.length !== 1 ? 's' : ''}
                                                   </span>
                                                   <span className="text-xs font-extrabold bg-gradient-to-r from-violet-600 to-indigo-500 bg-clip-text text-transparent">
@@ -661,18 +644,17 @@ const GroupDetail = () => {
                                    )}
                               </div>
 
-                              {/* Balances Placeholder */}
-                              <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden"
+                              {/* Balances Card */}
+                              <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden"
                                    style={{ animation: 'fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.22s both' }}>
-                                   <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-gray-50">
-                                        <h3 className="font-bold text-gray-800 text-sm flex items-center gap-2">
-                                             <span className="w-7 h-7 rounded-lg bg-purple-50 flex items-center justify-center">
-                                                  <Icon path={ICONS.balance} className="size-4 text-purple-500" />
+                                   <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-gray-50 dark:border-gray-800">
+                                        <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm flex items-center gap-2">
+                                             <span className="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center">
+                                                  <Icon path={ICONS.balance} className="size-4 text-purple-500 dark:text-purple-400" />
                                              </span>
                                              Balances
                                         </h3>
                                    </div>
-
                                    <div className="px-5 py-3">
                                         <BalanceSummary
                                              groupId={id || ''}
@@ -685,18 +667,18 @@ const GroupDetail = () => {
                                    </div>
                               </div>
 
-
                          </div>
-                         {/* â”€â”€ Left: Members â”€â”€ */}
-                         <div className="lg:col-span-2 flex flex-col gap-4 ">
+
+                         {/* Left: Members */}
+                         <div className="lg:col-span-2 flex flex-col gap-4">
 
                               {/* Add Member */}
-                              <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden"
+                              <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden"
                                    style={{ animation: 'fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.10s both' }}>
-                                   <div className="px-5 pt-5 pb-3 border-b border-gray-50">
-                                        <h3 className="font-bold text-gray-800 text-sm flex items-center gap-2">
-                                             <span className="w-7 h-7 rounded-lg bg-violet-50 flex items-center justify-center">
-                                                  <Icon path={ICONS.add_member} className="size-4 text-violet-500" />
+                                   <div className="px-5 pt-5 pb-3 border-b border-gray-50 dark:border-gray-800">
+                                        <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm flex items-center gap-2">
+                                             <span className="w-7 h-7 rounded-lg bg-violet-50 dark:bg-violet-900/20 flex items-center justify-center">
+                                                  <Icon path={ICONS.add_member} className="size-4 text-violet-500 dark:text-violet-400" />
                                              </span>
                                              Add Member
                                         </h3>
@@ -704,7 +686,7 @@ const GroupDetail = () => {
                                    <div className="px-5 py-4">
                                         <form onSubmit={handleAddMember} className="flex flex-col gap-3">
                                              <div className="flex flex-col gap-1">
-                                                  <label htmlFor="member-email" className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
+                                                  <label htmlFor="member-email" className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
                                                        Email Address
                                                   </label>
                                                   <input
@@ -714,16 +696,16 @@ const GroupDetail = () => {
                                                        value={memberEmail}
                                                        onChange={e => { setMemberEmail(e.target.value); setAddMemberError(''); }}
                                                        required
-                                                       className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-300 text-sm outline-none focus:border-violet-500 focus:bg-violet-50/50 transition-all"
+                                                       className="px-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-800 dark:text-gray-100 placeholder-gray-300 dark:placeholder-gray-600 text-sm outline-none focus:border-violet-500 focus:bg-violet-50/50 dark:focus:bg-violet-900/10 transition-all"
                                                   />
                                              </div>
                                              {addMemberError && (
-                                                  <p className="text-xs text-red-400 bg-red-50 border border-red-100 rounded-xl px-3 py-2">
+                                                  <p className="text-xs text-red-400 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-xl px-3 py-2">
                                                        {addMemberError}
                                                   </p>
                                              )}
                                              {addMemberSuccess && (
-                                                  <p className="text-xs text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-xl px-3 py-2 flex items-center gap-1.5"
+                                                  <p className="text-xs text-emerald-600 bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/20 rounded-xl px-3 py-2 flex items-center gap-1.5"
                                                        style={{ animation: 'popIn 0.3s cubic-bezier(0.16,1,0.3,1) both' }}>
                                                        <Icon path={ICONS.check} className="size-4" /> Invitation sent successfully!
                                                   </p>
@@ -743,43 +725,43 @@ const GroupDetail = () => {
                               </div>
 
                               {/* Members List */}
-                              <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden"
+                              <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden"
                                    style={{ animation: 'fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.14s both' }}>
-                                   <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-gray-50">
-                                        <h3 className="font-bold text-gray-800 text-sm flex items-center gap-2">
-                                             <span className="w-7 h-7 rounded-lg bg-violet-50 flex items-center justify-center">
-                                                  <Icon path={ICONS.members} className="size-4 text-violet-500" />
+                                   <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-gray-50 dark:border-gray-800">
+                                        <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm flex items-center gap-2">
+                                             <span className="w-7 h-7 rounded-lg bg-violet-50 dark:bg-violet-900/20 flex items-center justify-center">
+                                                  <Icon path={ICONS.members} className="size-4 text-violet-500 dark:text-violet-400" />
                                              </span>
                                              Members
                                         </h3>
-                                        <span className="text-xs font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+                                        <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full">
                                              {group?.members.length ?? 0}
                                         </span>
                                    </div>
                                    {group?.members.length === 0 ? (
                                         <div className="px-5 py-8 text-center">
-                                             <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center mx-auto mb-3">
-                                                  <Icon path={ICONS.members} className="size-6 text-gray-300" />
+                                             <div className="w-12 h-12 rounded-2xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center mx-auto mb-3">
+                                                  <Icon path={ICONS.members} className="size-6 text-gray-300 dark:text-gray-600" />
                                              </div>
-                                             <p className="text-sm text-gray-400">No members yet. Invite someone above!</p>
+                                             <p className="text-sm text-gray-400 dark:text-gray-500">No members yet. Invite someone above!</p>
                                         </div>
                                    ) : (
-                                        <ul className="divide-y divide-gray-50">
+                                        <ul className="divide-y divide-gray-50 dark:divide-gray-800">
                                              {group?.members.map((member, i) => (
                                                   <li key={member.id}
-                                                       className="flex items-center gap-3 px-5 py-3 group hover:bg-gray-50/60 transition-colors"
+                                                       className="flex items-center gap-3 px-5 py-3 group hover:bg-gray-50/60 dark:hover:bg-gray-800/40 transition-colors"
                                                        style={{ animation: `slideIn 0.4s cubic-bezier(0.16,1,0.3,1) ${0.16 + i * 0.05}s both` }}>
                                                        <Avatar name={member.username} size="md" />
                                                        <div className="flex-1 min-w-0">
-                                                            <p className="text-sm font-semibold text-gray-800 truncate">{member.username}</p>
-                                                            <p className="text-xs text-gray-400 truncate">{member.email}</p>
+                                                            <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 truncate">{member.username}</p>
+                                                            <p className="text-xs text-gray-400 dark:text-gray-500 truncate">{member.email}</p>
                                                        </div>
                                                        {group?.created_by === (JSON.parse(localStorage.getItem('user') || '{}').id) && (
                                                             <button
                                                                  type="button"
                                                                  onClick={() => handleRemoveMember(member.id)}
                                                                  title="Remove member"
-                                                                 className=" w-7 h-7 rounded-lg hover:bg-red-50 flex items-center justify-center text-gray-400 group-hover:text-red-400 md:text-gray-300 transition-all cursor-pointer">
+                                                                 className="w-7 h-7 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center justify-center text-gray-400 dark:text-gray-500 group-hover:text-red-400 dark:group-hover:text-red-400 md:text-gray-300 dark:md:text-gray-600 transition-all cursor-pointer">
                                                                  <Icon path={ICONS.trash} className="size-3.5" />
                                                             </button>
                                                        )}
@@ -788,17 +770,19 @@ const GroupDetail = () => {
                                         </ul>
                                    )}
                               </div>
+
                               {/* Leave Group */}
                               <div className="space-y-3" style={{ animation: 'fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.26s both' }}>
                                    <button
                                         type="button"
                                         onClick={() => setShowLeaveModal(true)}
-                                        className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-semibold text-sm bg-red-50 border border-red-100 text-red-500 shadow-sm hover:shadow-md hover:bg-red-100 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+                                        className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-semibold text-sm bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 text-red-500 shadow-sm hover:shadow-md hover:bg-red-100 dark:hover:bg-red-900/20 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
                                    >
                                         <Icon path={ICONS.leave} className="size-4" />
                                         Leave Group
                                    </button>
                               </div>
+
                          </div>
                     </div>
                </main>

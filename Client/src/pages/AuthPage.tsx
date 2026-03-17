@@ -59,10 +59,10 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-white overflow-x-hidden">
+    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-white dark:bg-gray-950 overflow-x-hidden transition-colors duration-300">
       {/*Form section*/}
-      <div className='flex-1  flex items-center justify-center p-6 xl:max-w-[43%] lg:max-w-[41%] lg:p-8 bg-gray-50/30 bg-white lg:justify-end md:py-30 sm:p-20 py-30 xl:pl-80'>
-        <div className="w-full h-fit max-w-md bg-white border border-gray-100 rounded-[2rem] p-8 lg:p-5 shadow-2xl"
+      <div className='flex-1  flex items-center justify-center p-6 xl:max-w-[43%] lg:max-w-[41%] lg:p-8 bg-gray-50/30 dark:bg-gray-950 lg:justify-end md:py-30 sm:p-20 py-30 xl:pl-80 transition-colors'>
+        <div className="w-full h-fit max-w-md bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-[2rem] p-8 lg:p-5 shadow-2xl transition-all"
           style={{ animation: 'fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both' }}>
 
           {/* Logo */}
@@ -71,7 +71,7 @@ const AuthPage = () => {
           </div>
 
           {/* Tab switcher */}
-          <div className="flex bg-gray-100 rounded-xl p-1 mb-7">
+          <div className="flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1 mb-7 transition-colors">
             {(['login', 'signup'] as const).map((tab) => (
               <button
                 key={tab}
@@ -80,7 +80,7 @@ const AuthPage = () => {
                 className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer
                   ${mode === tab
                     ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-500/40'
-                    : 'text-gray-400 hover:text-gray-600'}`}
+                    : 'text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'}`}
               >
                 {tab === 'login' ? 'Login' : 'Sign Up'}
               </button>
@@ -93,7 +93,7 @@ const AuthPage = () => {
             {/*show full name section for signup*/}
             {mode === 'signup' && (
               <div className="flex flex-col gap-1">
-                <label htmlFor="name" className="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+                <label htmlFor="name" className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest ml-1">
                   Full Name
                 </label>
                 <input
@@ -104,29 +104,29 @@ const AuthPage = () => {
                   onChange={(e) => setName(e.target.value)}
                   required
                   autoComplete="name"
-                  className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-300 text-sm outline-none focus:border-violet-500 focus:bg-violet-50 transition-all"
+                  className="px-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-800 dark:text-gray-100 placeholder-gray-300 dark:placeholder-gray-600 text-sm outline-none focus:border-violet-500 focus:bg-violet-50 dark:focus:bg-violet-900/10 transition-all"
                 />
               </div>
             )}
 
             <div className="flex flex-col gap-1">
-              <label htmlFor="email" className="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+              <label htmlFor="email" className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest ml-1">
                 Email
               </label>
               <input id="email" type="email" placeholder="you@email.com" value={email}
                 onChange={(e) => setEmail(e.target.value)} required autoComplete="email"
-                className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-300 text-sm outline-none focus:border-violet-500 focus:bg-violet-50 transition-all"
+                className="px-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-800 dark:text-gray-100 placeholder-gray-300 dark:placeholder-gray-600 text-sm outline-none focus:border-violet-500 focus:bg-violet-50 dark:focus:bg-violet-900/10 transition-all"
               />
             </div>
 
             <div className="flex flex-col gap-1">
-              <label htmlFor="password" className="text-xs font-semibold text-gray-500 uppercase tracking-widest">
+              <label htmlFor="password" className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest ml-1">
                 Password
               </label>
               <input id="password" type="password" placeholder="••••••••" value={password}
                 onChange={(e) => setPassword(e.target.value)} required
                 autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
-                className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-300 text-sm outline-none focus:border-violet-500 focus:bg-violet-50 transition-all"
+                className="px-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-800 dark:text-gray-100 placeholder-gray-300 dark:placeholder-gray-600 text-sm outline-none focus:border-violet-500 focus:bg-violet-50 dark:focus:bg-violet-900/10 transition-all"
               />
             </div>
 
@@ -150,12 +150,12 @@ const AuthPage = () => {
           </form>
 
           {/* for signup */}
-          <p className="mt-5 text-center text-sm text-gray-400">
+          <p className="mt-5 text-center text-sm text-gray-400 dark:text-gray-500">
             {mode === 'login' ? "Don't have an account? " : 'Already have an account? '}
             <button
               type="button"
               onClick={() => { setMode(mode === 'login' ? 'signup' : 'login'); setError(''); }}
-              className="text-violet-400 font-semibold hover:text-violet-300 hover:underline transition-colors cursor-pointer bg-transparent border-none p-0"
+              className="text-violet-500 dark:text-violet-400 font-semibold hover:text-violet-400 dark:hover:text-violet-300 hover:underline transition-colors cursor-pointer bg-transparent border-none p-0"
             >
               {mode === 'login' ? 'Sign Up' : 'Login'}
             </button>
@@ -165,11 +165,13 @@ const AuthPage = () => {
 
       {/*TEXT SECTION*/}
       <div className='flex-1 flex flex-col justify-center items-center lg:items-start px-6 py-12 lg:px-6 md:px-10'>
-        <h1 className="text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-center lg:text-left bg-gradient-to-r from-violet-600 via-purple-500 to-indigo-600 bg-clip-text text-transparent leading-tight">
-          Track Shared Expenses.   <br />Simplify Spending. <br /> Settle Smarter.
+        <h1 className="text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-center lg:text-left bg-gradient-to-r from-violet-600 via-purple-500 to-indigo-600 bg-clip-text text-transparent leading-[1.15] tracking-tight">
+          Track Shared Expenses. <br />
+          Simplify Spending. <br />
+          Settle Smarter.
         </h1>
 
-        <p className="text-base md:text-md lg:text-lg xl:text-lg text-gray-500 text-center lg:text-left mt-4">
+        <p className="text-base md:text-lg lg:text-xl text-gray-500 dark:text-gray-400 text-center lg:text-left mt-6 max-w-lg leading-relaxed font-medium">
           Manage group expenses, split costs instantly, and keep everyone balanced.
         </p>
       </div>

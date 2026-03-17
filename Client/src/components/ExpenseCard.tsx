@@ -91,23 +91,23 @@ export const EditExpenseModal = ({ expense, onClose, onSuccess }: EditExpenseMod
      return (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4"
                style={{ animation: 'backdropIn 0.2s ease both' }}>
-               <div className="absolute inset-0 bg-gray-900/50 backdrop-blur-md" onClick={onClose} />
-               <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl shadow-violet-500/10 overflow-hidden"
+               <div className="absolute inset-0 bg-gray-900/50 dark:bg-black/60 backdrop-blur-md" onClick={onClose} />
+               <div className="relative w-full max-w-lg bg-white dark:bg-gray-900 rounded-3xl shadow-2xl shadow-violet-500/10 overflow-hidden"
                     style={{ animation: 'modalIn 0.3s cubic-bezier(0.16,1,0.3,1) both' }}>
 
                     {/* Header */}
-                    <div className="flex items-center justify-between px-7 pt-6 pb-5 border-b border-gray-100">
+                    <div className="flex items-center justify-between px-7 pt-6 pb-5 border-b border-gray-100 dark:border-gray-800">
                          <div className="flex items-center gap-3">
                               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30">
                                    <Icon path={ICONS.pencil} className="size-5 text-white" />
                               </div>
                               <div>
-                                   <h2 className="text-lg font-extrabold text-gray-900 tracking-tight">Edit Expense</h2>
-                                   <p className="text-sm text-gray-400 mt-0.5">Update the details below</p>
+                                   <h2 className="text-lg font-extrabold text-gray-900 dark:text-white tracking-tight">Edit Expense</h2>
+                                   <p className="text-sm text-gray-400 dark:text-gray-500 mt-0.5">Update the details below</p>
                               </div>
                          </div>
                          <button type="button" onClick={onClose}
-                              className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all cursor-pointer">
+                              className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all cursor-pointer">
                               <Icon path={ICONS.close} className="size-5" />
                          </button>
                     </div>
@@ -116,8 +116,8 @@ export const EditExpenseModal = ({ expense, onClose, onSuccess }: EditExpenseMod
                     <form onSubmit={handleSubmit} className="px-7 py-6 space-y-5">
                          {/* Title field */}
                          <div className="space-y-2">
-                              <label htmlFor="edit-title" className="text-xs font-semibold text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
-                                   <Icon path={ICONS.tag} className="size-3.5 text-gray-300" />
+                              <label htmlFor="edit-title" className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
+                                   <Icon path={ICONS.tag} className="size-3.5 text-gray-300 dark:text-gray-600" />
                                    Title
                               </label>
                               <input ref={titleRef} id="edit-title" type="text"
@@ -125,28 +125,28 @@ export const EditExpenseModal = ({ expense, onClose, onSuccess }: EditExpenseMod
                                    value={title}
                                    onChange={e => { setTitle(e.target.value); setError(''); }}
                                    required
-                                   className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-300 text-sm outline-none focus:border-amber-500 focus:bg-amber-50/40 focus:ring-2 focus:ring-amber-500/20 transition-all" />
+                                   className="w-full px-4 py-3.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-800 dark:text-gray-100 placeholder-gray-300 dark:placeholder-gray-600 text-sm outline-none focus:border-amber-500 focus:bg-amber-50/40 dark:focus:bg-amber-900/10 focus:ring-2 focus:ring-amber-500/20 transition-all" />
                          </div>
 
                          {/* Amount field */}
                          <div className="space-y-2">
-                              <label htmlFor="edit-amount" className="text-xs font-semibold text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
-                                   <Icon path={ICONS.dollar} className="size-3.5 text-gray-300" />
+                              <label htmlFor="edit-amount" className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
+                                   <Icon path={ICONS.dollar} className="size-3.5 text-gray-300 dark:text-gray-600" />
                                    Amount
                               </label>
                               <div className="relative">
-                                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400 pointer-events-none">$</span>
+                                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400 dark:text-gray-500 pointer-events-none">$</span>
                                    <input id="edit-amount" type="number" min="0.01" step="0.01" placeholder="0.00"
                                         value={amount}
                                         onChange={e => { setAmount(e.target.value); setError(''); }}
                                         required
-                                        className="w-full pl-8 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-300 text-sm outline-none focus:border-amber-500 focus:bg-amber-50/40 focus:ring-2 focus:ring-amber-500/20 transition-all" />
+                                        className="w-full pl-8 pr-4 py-3.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-800 dark:text-gray-100 placeholder-gray-300 dark:placeholder-gray-600 text-sm outline-none focus:border-amber-500 focus:bg-amber-50/40 dark:focus:bg-amber-900/10 focus:ring-2 focus:ring-amber-500/20 transition-all" />
                               </div>
                          </div>
 
                          {/* Error */}
                          {error && (
-                              <p className="text-xs text-red-400 bg-red-50 border border-red-100 rounded-xl px-4 py-3"
+                              <p className="text-xs text-red-400 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-xl px-4 py-3"
                                    style={{ animation: 'popIn 0.25s cubic-bezier(0.16,1,0.3,1) both' }}>
                                    {error}
                               </p>
@@ -155,7 +155,7 @@ export const EditExpenseModal = ({ expense, onClose, onSuccess }: EditExpenseMod
                          {/* Actions */}
                          <div className="flex items-center gap-3 pt-2">
                               <button type="button" onClick={onClose}
-                                   className="flex-1 py-3.5 rounded-xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all cursor-pointer">
+                                   className="flex-1 py-3.5 rounded-xl text-sm font-semibold bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all cursor-pointer">
                                    Cancel
                               </button>
                               <button type="submit"
@@ -207,21 +207,21 @@ export const DeleteConfirmModal = ({ expense, onClose, onSuccess }: DeleteConfir
      return (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4"
                style={{ animation: 'backdropIn 0.2s ease both' }}>
-               <div className="absolute inset-0 bg-gray-900/50 backdrop-blur-md" onClick={onClose} />
-               <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl shadow-red-500/10 overflow-hidden"
+               <div className="absolute inset-0 bg-gray-900/50 dark:bg-black/60 backdrop-blur-md" onClick={onClose} />
+               <div className="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-3xl shadow-2xl shadow-red-500/10 overflow-hidden"
                     style={{ animation: 'modalIn 0.3s cubic-bezier(0.16,1,0.3,1) both' }}>
                     <div className="px-7 py-8 text-center">
-                         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center mx-auto mb-5">
-                              <Icon path={ICONS.warning} className="size-8 text-red-400" />
+                         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-900/40 flex items-center justify-center mx-auto mb-5">
+                              <Icon path={ICONS.warning} className="size-8 text-red-400 dark:text-red-500" />
                          </div>
-                         <h2 className="text-lg font-extrabold text-gray-900 tracking-tight">Delete Expense?</h2>
-                         <p className="text-sm text-gray-400 mt-3 leading-relaxed max-w-xs mx-auto">
-                              Are you sure you want to delete <span className="font-semibold text-gray-600">"{expense.title}"</span>?
+                         <h2 className="text-lg font-extrabold text-gray-900 dark:text-white tracking-tight">Delete Expense?</h2>
+                         <p className="text-sm text-gray-400 dark:text-gray-500 mt-3 leading-relaxed max-w-xs mx-auto">
+                              Are you sure you want to delete <span className="font-semibold text-gray-600 dark:text-gray-300">"{expense.title}"</span>?
                               This will also remove all associated splits. This action cannot be undone.
                          </p>
 
                          {error && (
-                              <p className="mt-4 text-xs text-red-400 bg-red-50 border border-red-100 rounded-xl px-4 py-3"
+                              <p className="mt-4 text-xs text-red-400 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-xl px-4 py-3"
                                    style={{ animation: 'popIn 0.25s cubic-bezier(0.16,1,0.3,1) both' }}>
                                    {error}
                               </p>
@@ -229,7 +229,7 @@ export const DeleteConfirmModal = ({ expense, onClose, onSuccess }: DeleteConfir
 
                          <div className="flex items-center gap-3 mt-6">
                               <button type="button" onClick={onClose}
-                                   className="flex-1 py-3.5 rounded-xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all cursor-pointer">
+                                   className="flex-1 py-3.5 rounded-xl text-sm font-semibold bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all cursor-pointer">
                                    Cancel
                               </button>
                               <button type="button" onClick={handleDelete} disabled={deleting}
@@ -271,7 +271,7 @@ const ExpenseCard = ({ expense, index, onEdit, onDelete }: ExpenseCardProps) => 
 
      return (
           <li
-               className="group/card flex items-center gap-4 px-5 py-4 hover:bg-gray-50/70 transition-colors border-b border-gray-50 last:border-0"
+               className="group/card flex items-center gap-4 px-5 py-4 hover:bg-gray-50/70 dark:hover:bg-gray-800/40 transition-colors border-b border-gray-50 dark:border-gray-800 last:border-0"
                style={{ animation: `slideIn 0.4s cubic-bezier(0.16,1,0.3,1) ${0.18 + index * 0.05}s both` }}
           >
                {/* Icon */}
@@ -281,23 +281,23 @@ const ExpenseCard = ({ expense, index, onEdit, onDelete }: ExpenseCardProps) => 
 
                {/* Details */}
                <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-gray-800 truncate">{expense.title}</p>
+                    <p className="text-sm font-bold text-gray-800 dark:text-gray-200 truncate">{expense.title}</p>
                     <div className="flex items-center gap-2 mt-0.5 flex-wrap">
-                         <span className="flex items-center gap-1 text-xs text-gray-400">
-                              <Icon path={ICONS.user_circle} className="size-3.5 text-gray-300" />
-                              <span className="font-semibold text-violet-500">{expense.paid_by_username}</span>
+                         <span className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
+                              <Icon path={ICONS.user_circle} className="size-3.5 text-gray-300 dark:text-gray-600" />
+                              <span className="font-semibold text-violet-500 dark:text-violet-400">{expense.paid_by_username}</span>
                               <span>paid</span>
                          </span>
-                         <span className="text-gray-200">·</span>
-                         <span className="flex items-center gap-1 text-xs text-gray-400">
-                              <Icon path={ICONS.clock} className="size-3 text-gray-300" />
+                         <span className="text-gray-200 dark:text-gray-700">·</span>
+                         <span className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
+                              <Icon path={ICONS.clock} className="size-3 text-gray-300 dark:text-gray-600" />
                               {formattedDate}
                          </span>
                          {expense.split_count && expense.split_count > 1 && (
                               <>
-                                   <span className="text-gray-200">·</span>
-                                   <span className="flex items-center gap-1 text-xs text-gray-400">
-                                        <Icon path={ICONS.split} className="size-3 text-gray-300" />
+                                   <span className="text-gray-200 dark:text-gray-700">·</span>
+                                   <span className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
+                                        <Icon path={ICONS.split} className="size-3 text-gray-300 dark:text-gray-600" />
                                         split {expense.split_count} ways
                                    </span>
                               </>
@@ -308,9 +308,9 @@ const ExpenseCard = ({ expense, index, onEdit, onDelete }: ExpenseCardProps) => 
                {/* Amount + Actions */}
                <div className="flex items-center gap-3 flex-shrink-0">
                     <div className="text-right">
-                         <p className="text-sm font-extrabold text-gray-800">${amount.toFixed(2)}</p>
+                         <p className="text-sm font-extrabold text-gray-800 dark:text-gray-200">${amount.toFixed(2)}</p>
                          {expense.split_count && expense.split_count > 1 && (
-                              <p className="text-xs text-gray-400 mt-0.5">
+                              <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
                                    ${(amount / expense.split_count).toFixed(2)}/person
                               </p>
                          )}
@@ -320,11 +320,11 @@ const ExpenseCard = ({ expense, index, onEdit, onDelete }: ExpenseCardProps) => 
                     {isOwner && (
                          <div className="flex items-center gap-1 opacity-100 md:opacity-0 md:group-hover/card:opacity-100 transition-opacity duration-200">
                               <button type="button" onClick={() => onEdit(expense)} title="Edit expense"
-                                   className="w-8 h-8 rounded-lg hover:bg-amber-50 flex items-center justify-center text-gray-400 group-hover/card:text-amber-500 md:text-gray-300 transition-all cursor-pointer">
+                                   className="w-8 h-8 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/20 flex items-center justify-center text-gray-400 dark:text-gray-500 group-hover/card:text-amber-500 md:text-gray-300 dark:md:text-gray-600 transition-all cursor-pointer">
                                    <Icon path={ICONS.pencil} className="size-3.5" />
                               </button>
                               <button type="button" onClick={() => onDelete(expense)} title="Delete expense"
-                                   className="w-8 h-8 rounded-lg hover:bg-red-50 flex items-center justify-center text-gray-400 group-hover/card:text-red-400 md:text-gray-300 transition-all cursor-pointer">
+                                   className="w-8 h-8 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center justify-center text-gray-400 dark:text-gray-500 group-hover/card:text-red-400 md:text-gray-300 dark:md:text-gray-600 transition-all cursor-pointer">
                                    <Icon path={ICONS.trash} className="size-3.5" />
                               </button>
                          </div>

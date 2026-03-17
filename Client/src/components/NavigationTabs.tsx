@@ -38,8 +38,8 @@ const NavigationTabs = ({ activeTab: propActiveTab, isMobile, onClose }: Navigat
             key={tab}
             onClick={() => handleTabClick(tab)}
             className={`w-full text-left px-6 py-4 text-sm font-bold capitalize transition-all duration-200 border-l-2 ${activeTab === tab
-              ? 'bg-violet-50 border-violet-600 text-violet-600'
-              : 'border-transparent text-gray-500 hover:bg-gray-50'
+              ? 'bg-violet-50 dark:bg-violet-900/20 border-violet-600 text-violet-600 dark:text-violet-400'
+              : 'border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900/50'
               }`}
           >
             {tab}
@@ -56,8 +56,8 @@ const NavigationTabs = ({ activeTab: propActiveTab, isMobile, onClose }: Navigat
           key={tab}
           onClick={() => handleTabClick(tab)}
           className={`relative px-4 self-stretch flex items-center text-sm font-bold capitalize transition-all duration-200 cursor-pointer ${activeTab === tab
-            ? 'text-violet-600'
-            : 'text-gray-400 hover:text-gray-600'
+            ? 'text-violet-600 dark:text-violet-400'
+            : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'
             }`}
         >
           {tab}

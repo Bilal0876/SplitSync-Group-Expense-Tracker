@@ -45,49 +45,58 @@ const CreateGroupModal = ({ open, onClose, onCreated }: CreateGroupModalProps) =
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ animation: 'backdropIn 0.2s ease both' }}>
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
 
       {/* Modal */}
-      <div className="relative w-full max-w-md mx-4 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6"
-        style={{ animation: 'fadeUp 0.35s cubic-bezier(0.16,1,0.3,1) both' }}>
+      <div className="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-[2rem] shadow-2xl shadow-violet-500/10 border border-gray-100 dark:border-gray-800 p-8"
+        style={{ animation: 'modalIn 0.35s cubic-bezier(0.16,1,0.3,1) both' }}>
 
         {/* Close button */}
         <button onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer">
-          <Icon path={ICONS.close} className="size-4" />
+          className="absolute top-6 right-6 w-9 h-9 rounded-xl flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all cursor-pointer">
+          <Icon path={ICONS.close} className="size-5" />
         </button>
 
-        <h3 className="text-lg font-extrabold text-gray-900 mb-1">Create New Group</h3>
-        <p className="text-sm text-gray-400 mb-5">Start splitting expenses with your team.</p>
+        <div className="mb-8">
+          <h3 className="text-xl font-black text-gray-900 dark:text-white mb-2">Create New Group</h3>
+          <p className="text-sm text-gray-400 dark:text-gray-500 leading-relaxed">Organize your expenses into a shared circle for your team or trip.</p>
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="group-name" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
+            <label htmlFor="group-name" className="block text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-[0.15em] ml-1">
               Group Name
             </label>
             <input
               id="group-name"
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => { setName(e.target.value); setError(''); }}
               placeholder="e.g. Barcelona Trip"
               autoFocus
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500/30 focus:border-violet-400 transition-all"
+              className="w-full px-5 py-4 rounded-2xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 text-sm font-semibold text-gray-800 dark:text-gray-100 placeholder-gray-300 dark:placeholder-gray-600 focus:outline-none focus:ring-4 focus:ring-violet-500/10 focus:border-violet-500 transition-all shadow-sm"
             />
           </div>
 
           {error && (
-            <p className="text-xs text-rose-500 font-medium">{error}</p>
+            <p className="px-4 py-3 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 text-xs text-rose-500 font-bold rounded-xl animate-[popIn_0.2s_ease-out]">
+              {error}
+            </p>
           )}
 
           <button
             type="submit"
-            disabled={loading}
-            className="w-full py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-bold shadow-lg shadow-violet-500/30 hover:opacity-90 disabled:opacity-60 transition-opacity cursor-pointer"
+            disabled={loading || !name.trim()}
+            className="w-full py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-bold shadow-xl shadow-violet-500/30 hover:opacity-95 hover:-translate-y-px active:translate-y-0 disabled:opacity-50 disabled:translate-y-0 transition-all cursor-pointer flex items-center justify-center gap-2"
           >
-            {loading ? 'Creating…' : 'Create Group'}
+            {loading ? (
+              <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : (
+              'Create Circle'
+            )}
           </button>
         </form>
       </div>

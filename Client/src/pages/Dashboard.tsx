@@ -37,16 +37,16 @@ const GROUP_COLORS = [
 const StatCard = ({ label, value, sub, icon, delay = '0ms' }: {
   label: string; value: string; sub: string; icon: string; delay?: string;
 }) => (
-  <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200"
+  <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200"
     style={{ animation: `fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) ${delay} both` }}>
     <div className="flex items-center justify-between mb-4">
-      <span className="text-xs font-semibold text-gray-400 uppercase tracking-widest">{label}</span>
-      <span className="w-9 h-9 rounded-xl bg-violet-50 flex items-center justify-center text-violet-500">
+      <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{label}</span>
+      <span className="w-9 h-9 rounded-xl bg-violet-50 dark:bg-violet-900/20 flex items-center justify-center text-violet-500 dark:text-violet-400">
         <Icon path={icon} className="size-4 " />
       </span>
     </div>
-    <p className="font-extrabold text-xl lg:text-lg xl:text-2xl text-gray-900 tracking-tight">{value}</p>
-    <p className="text-xs text-gray-400 mt-1">{sub}</p>
+    <p className="font-extrabold text-xl lg:text-lg xl:text-2xl text-gray-900 dark:text-white tracking-tight">{value}</p>
+    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{sub}</p>
   </div>
 );
 
@@ -109,7 +109,7 @@ const Dashboard = () => {
   const groupsCount = dashboardData?.groupsCount ?? groups.length;
 
   return (
-    <div className="min-h-screen bg-gray-50/60 flex flex-col font-sans">
+    <div className="min-h-screen bg-gray-50/60 dark:bg-gray-950 flex flex-col font-sans transition-colors duration-300">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
       `}</style>
@@ -122,10 +122,10 @@ const Dashboard = () => {
 
         {/* Welcome */}
         <div style={{ animation: 'fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.05s both' }}>
-          <h2 className="text-2xl font-extrabold text-gray-900">
+          <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
             Good day, <span className="bg-gradient-to-r from-violet-600 to-indigo-500 bg-clip-text text-transparent">{user?.name?.split(' ')[0] ?? 'there'}</span>
           </h2>
-          <p className="text-sm text-gray-400 mt-0.5">Here's your expense snapshot for today.</p>
+          <p className="text-sm text-gray-400 dark:text-gray-500 mt-0.5">Here's your expense snapshot for today.</p>
         </div>
 
         {/*Stats*/}
@@ -142,18 +142,18 @@ const Dashboard = () => {
         <div className="grid lg:grid-cols-5 gap-6">
 
           {/* Balances */}
-          <div className="lg:col-span-2 bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden"
+          <div className="lg:col-span-2 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden"
             style={{ animation: 'fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.22s both' }}>
             <div className="flex items-center justify-between px-5 pt-5 pb-3">
-              <h3 className="font-bold text-gray-800 text-sm">Balances</h3>
+              <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm">Balances</h3>
               <button
                 onClick={() => navigate('/activity')}
-                className="text-xs text-violet-500 font-semibold hover:text-violet-400 transition-colors cursor-pointer"
+                className="text-xs text-violet-500 dark:text-violet-400 font-semibold hover:text-violet-400 dark:hover:text-violet-300 transition-colors cursor-pointer"
               >
                 Settle Up →
               </button>
             </div>
-            <ul className="divide-y divide-gray-50">
+            <ul className="divide-y divide-gray-50 dark:divide-gray-800">
               {statsLoading ? (
                 <div className="py-8 flex justify-center"><div className="w-5 h-5 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" /></div>
               ) : dashboardData?.summarizedBalances.length === 0 ? (
@@ -163,10 +163,10 @@ const Dashboard = () => {
                   <li key={b.userId} className="flex items-center justify-between px-5 py-3.5"
                     style={{ animation: `slideIn 0.4s cubic-bezier(0.16,1,0.3,1) ${0.25 + i * 0.06}s both` }}>
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-100 to-indigo-100 flex items-center justify-center text-violet-600 text-xs font-bold uppercase">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-100 to-indigo-100 dark:from-violet-900/30 dark:to-indigo-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400 text-xs font-bold uppercase">
                         {b.username.charAt(0)}
                       </div>
-                      <span className="text-sm font-semibold text-gray-700">{b.username}</span>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{b.username}</span>
                     </div>
                     <div className={`flex items-center gap-1 text-sm font-bold ${b.dir === 'owed_to_me' ? 'text-emerald-500' : 'text-rose-500'}`}>
                       ${b.amount.toFixed(2)}
@@ -178,10 +178,10 @@ const Dashboard = () => {
           </div>
 
           {/* Groups */}
-          <div className="lg:col-span-3 bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden"
+          <div className="lg:col-span-3 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden"
             style={{ animation: 'fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.26s both' }}>
             <div className="flex items-center justify-between px-5 pt-5 pb-3">
-              <h3 className="font-bold text-gray-800 text-sm">Your Groups</h3>
+              <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm">Your Groups</h3>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => navigate('/groups')}
@@ -216,7 +216,7 @@ const Dashboard = () => {
             {/* Empty state */}
             {!groupsLoading && !groupsError && groups.length === 0 && (
               <div className="px-5 py-12 text-center">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-300">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-2xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-gray-300 dark:text-gray-600">
                   <Icon path={ICONS.empty} className="size-6" />
                 </div>
                 <p className="text-sm font-semibold text-gray-500">No groups yet</p>
@@ -226,22 +226,22 @@ const Dashboard = () => {
 
             {/* Group list */}
             {!groupsLoading && !groupsError && groups.length > 0 && (
-              <ul className="divide-y divide-gray-50">
+              <ul className="divide-y divide-gray-50 dark:divide-gray-800">
                 {groups.slice(0, 5).map((g, i) => (
                   <li key={g.id}
                     onClick={() => navigate(`/groups/${g.id}`)}
-                    className="flex items-center gap-4 px-5 py-3.5 hover:bg-gray-50/60 transition-colors group cursor-pointer"
+                    className="flex items-center gap-4 px-5 py-3.5 hover:bg-gray-50/60 dark:hover:bg-gray-800/60 transition-colors group cursor-pointer"
                     style={{ animation: `slideIn 0.4s cubic-bezier(0.16,1,0.3,1) ${0.28 + i * 0.06}s both` }}>
                     <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${GROUP_COLORS[i % GROUP_COLORS.length]} flex items-center justify-center shadow-md flex-shrink-0`}>
                       <Icon path={ICONS.groups} className="size-5 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-gray-800 truncate">{g.name}</p>
-                      <p className="text-xs text-gray-400">
+                      <p className="text-sm font-bold text-gray-800 dark:text-gray-200 truncate">{g.name}</p>
+                      <p className="text-xs text-gray-400 dark:text-gray-500">
                         {g.member_count ?? 0} {(g.member_count ?? 0) === 1 ? 'member' : 'members'}
                       </p>
                     </div>
-                    <div className="px-3.5 py-1.5 text-xs font-semibold rounded-lg border border-violet-200 text-violet-600 group-hover:bg-violet-50 group-hover:border-violet-300 transition-all cursor-pointer flex-shrink-0">
+                    <div className="px-3.5 py-1.5 text-xs font-semibold rounded-lg border border-violet-200 dark:border-violet-900/50 text-violet-600 dark:text-violet-400 group-hover:bg-violet-50 dark:group-hover:bg-violet-900/20 group-hover:border-violet-300 dark:group-hover:border-violet-800 transition-all cursor-pointer flex-shrink-0">
                       View
                     </div>
                   </li>
@@ -252,40 +252,40 @@ const Dashboard = () => {
         </div>
 
         {/* Recent Activities section */}
-        <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden"
+        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm overflow-hidden"
           style={{ animation: 'fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.34s both' }}>
 
           <div className="flex items-center justify-between px-5 pt-5 pb-3">
-            <h3 className="font-bold text-gray-800 text-sm">Recent Activity</h3>
+            <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm">Recent Activity</h3>
             <button
               onClick={() => navigate('/activity')}
-              className="text-xs text-violet-500 font-semibold hover:text-violet-400 transition-colors cursor-pointer"
+              className="text-xs text-violet-500 dark:text-violet-400 font-semibold hover:text-violet-400 dark:hover:text-violet-300 transition-colors cursor-pointer"
             >
               View all →
             </button>
           </div>
 
           {/*activities list*/}
-          <ul className="divide-y divide-gray-50">
+          <ul className="divide-y divide-gray-50 dark:divide-gray-800">
             {statsLoading ? (
               <div className="py-12 flex justify-center"><div className="w-6 h-6 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" /></div>
             ) : dashboardData?.recentActivity.length === 0 ? (
               <p className="py-12 text-sm text-gray-400 text-center font-medium">No recent activity found.</p>
             ) : (
               dashboardData?.recentActivity.slice(0, 5).map((a, i) => (
-                <li key={`${a.type}-${i}`} className="flex items-center gap-4 px-5 py-3.5 cursor-default hover:bg-gray-50/40 transition-colors"
+                <li key={`${a.type}-${i}`} className="flex items-center gap-4 px-5 py-3.5 cursor-default hover:bg-gray-50/40 dark:hover:bg-gray-800/40 transition-colors"
                   style={{ animation: `slideIn 0.4s cubic-bezier(0.16,1,0.3,1) ${0.36 + i * 0.05}s both` }}>
-                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${a.paid_by_id === user?.id ? 'bg-violet-50 text-violet-500' : 'bg-gray-50 text-gray-400'}`}>
+                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${a.paid_by_id === user?.id ? 'bg-violet-50 dark:bg-violet-900/20 text-violet-500 dark:text-violet-400' : 'bg-gray-50 dark:bg-gray-800 text-gray-400 dark:text-gray-500'}`}>
                     <Icon path={a.type === 'expense' ? ICONS.add : ICONS.settle} className="size-4" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-gray-800 truncate">{a.title}</p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 truncate">{a.title}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500">
                       {a.paid_by_id === user?.id ? 'You' : a.paid_by_username} {a.type === 'expense' ? 'paid' : 'settled'} · {a.group_name}
                     </p>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <p className={`text-sm font-bold ${a.type === 'settlement' ? 'text-emerald-500' : 'text-gray-700'}`}>${a.amount.toFixed(2)}</p>
+                    <p className={`text-sm font-bold ${a.type === 'settlement' ? 'text-emerald-500' : 'text-gray-700 dark:text-gray-300'}`}>${a.amount.toFixed(2)}</p>
                     <p className="text-[10px] text-gray-400 font-medium">
                       {new Date(a.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                     </p>

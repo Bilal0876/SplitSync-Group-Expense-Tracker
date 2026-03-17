@@ -53,45 +53,45 @@ const ActivityPage = () => {
   const activityByGroup = groupedTasks();
 
   return (
-    <div className="min-h-screen bg-gray-50/60 flex flex-col font-sans">
+    <div className="min-h-screen bg-gray-50/60 dark:bg-gray-950 flex flex-col font-sans transition-colors duration-300">
       <Header />
 
       <main className="flex-1 w-full max-w-5xl xl:max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8" style={{ animation: 'fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both' }}>
-          <h1 className="text-3xl font-black text-gray-900">Activity History</h1>
-          <p className="text-sm text-gray-400 mt-1">Every transaction across all your expense circles.</p>
+          <h1 className="text-3xl font-black text-gray-900 dark:text-white transition-colors">Activity History</h1>
+          <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Every transaction across all your expense circles.</p>
         </div>
 
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 animate-pulse">
             {[1, 2, 3, 4].map(i => (
-              <div key={i} className="h-64 bg-gray-100 rounded-[2.5rem]" />
+              <div key={i} className="h-64 bg-gray-100 dark:bg-gray-800 rounded-[2.5rem]" />
             ))}
           </div>
         ) : Object.keys(activityByGroup).length === 0 ? (
-          <div className="bg-white border border-gray-100 rounded-[2.5rem] p-16 text-center shadow-sm">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gray-50 flex items-center justify-center text-gray-300">
+          <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-[2.5rem] p-16 text-center shadow-sm">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-gray-300 dark:text-gray-600">
               <Icon path={ICONS.empty} className="size-10" />
             </div>
-            <h3 className="text-xl font-extrabold text-gray-900 mb-2">No Activities yet</h3>
-            <p className="text-gray-400 max-w-xs mx-auto">Activities will appear here once you start splitting expenses in your groups.</p>
+            <h3 className="text-xl font-extrabold text-gray-900 dark:text-white mb-2">No Activities yet</h3>
+            <p className="text-gray-400 dark:text-gray-500 max-w-xs mx-auto">Activities will appear here once you start splitting expenses in your groups.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 items-start">
             {Object.entries(activityByGroup).map(([groupName, activities], idx) => (
               <div
                 key={groupName}
-                className="bg-white border border-gray-100 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+                className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
                 style={{ animation: `fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) ${idx * 0.1}s both` }}
               >
                 {/* Group Box Header */}
-                <div className="px-6 py-5 bg-gradient-to-r from-violet-600/5 to-indigo-600/5 border-b border-gray-50 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-violet-600">
+                <div className="px-6 py-5 bg-gradient-to-r from-violet-600/5 to-indigo-600/5 dark:from-violet-900/10 dark:to-indigo-900/10 border-b border-gray-50 dark:border-gray-800 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center text-violet-600 dark:text-violet-400">
                     <Icon path={ICONS.groups} className="size-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-black text-gray-900">{groupName}</h3>
-                    <p className="text-[10px] uppercase tracking-widest font-bold text-gray-400">{activities.length} recent events</p>
+                    <h3 className="text-sm font-black text-gray-900 dark:text-gray-100 transition-colors uppercase">{groupName}</h3>
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-gray-400 dark:text-gray-500">{activities.length} recent events</p>
                   </div>
                 </div>
 
@@ -103,21 +103,23 @@ const ActivityPage = () => {
                         key={`${a.type}-${i}`}
                         className="flex items-center gap-4 px-4 py-3.5 hover:bg-gray-50/50 rounded-2xl transition-colors group"
                       >
-                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110 ${a.type === 'expense' ? 'bg-violet-50 text-violet-500' : 'bg-emerald-50 text-emerald-500'
+                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110 ${a.type === 'expense' 
+                          ? 'bg-violet-50 dark:bg-violet-900/20 text-violet-500 dark:text-violet-400' 
+                          : 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 dark:text-emerald-400'
                           }`}>
                           <Icon path={a.type === 'expense' ? ICONS.add : ICONS.settle} className="size-4" />
                         </div>
 
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs font-extrabold text-gray-900 truncate">{a.title}</p>
-                          <p className="text-[10px] text-gray-500 mt-0.5">
-                            <span className="font-bold text-gray-700">{a.paid_by_id === user?.id ? 'You' : a.paid_by_username}</span>
+                          <p className="text-xs font-extrabold text-gray-900 dark:text-gray-100 truncate">{a.title}</p>
+                          <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5">
+                            <span className="font-bold text-gray-700 dark:text-gray-300">{a.paid_by_id === user?.id ? 'You' : a.paid_by_username}</span>
                             {a.type === 'expense' ? ' paid' : ' settled'}
                           </p>
                         </div>
 
                         <div className="text-right">
-                          <p className={`text-sm font-black ${a.type === 'settlement' ? 'text-emerald-500' : 'text-gray-900'
+                          <p className={`text-sm font-black ${a.type === 'settlement' ? 'text-emerald-500' : 'text-gray-900 dark:text-gray-100'
                             }`}>${a.amount.toFixed(2)}</p>
                           <p className="text-[9px] font-bold text-gray-400 mt-0.5 uppercase tracking-widest">
                             {new Date(a.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}

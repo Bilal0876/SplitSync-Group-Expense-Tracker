@@ -61,15 +61,15 @@ const GroupsPage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50/60 flex flex-col font-sans">
+    <div className="min-h-screen bg-gray-50/60 dark:bg-gray-950 flex flex-col font-sans transition-colors duration-300">
       <Header />
 
       <main className="flex-1 w-full max-w-5xl lg:max-w-4xl xl:max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
           style={{ animation: 'fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both' }}>
           <div>
-            <h1 className="text-3xl font-black text-gray-900">Groups</h1>
-            <p className="text-sm text-gray-400 mt-1">Manage and track all your shared expenses.</p>
+            <h1 className="text-3xl font-black text-gray-900 dark:text-white transition-colors">Groups</h1>
+            <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Manage and track all your shared expenses.</p>
           </div>
           <button
             onClick={() => setShowCreateModal(true)}
@@ -89,26 +89,26 @@ const GroupsPage = () => {
             placeholder="Search groups..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-14 pr-6 py-4 bg-white border border-gray-100 rounded-[2rem] shadow-sm focus:ring-4 focus:ring-violet-500/10 focus:border-violet-500 transition-all outline-none text-gray-700 font-medium"
+            className="w-full pl-14 pr-6 py-4 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-[2rem] shadow-sm focus:ring-4 focus:ring-violet-500/10 focus:border-violet-500 transition-all outline-none text-gray-700 dark:text-gray-200 font-medium"
           />
         </div>
 
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
             {[1, 2, 3, 4, 5, 6].map(i => (
-              <div key={i} className="h-48 bg-gray-100 rounded-[2.5rem] animate-pulse" />
+              <div key={i} className="h-48 bg-gray-100 dark:bg-gray-800 rounded-[2.5rem] animate-pulse" />
             ))}
           </div>
 
         ) : filteredGroups.length === 0 ? (
 
-          <div className="bg-white border border-gray-100 rounded-[2.5rem] p-16 text-center shadow-sm">
+          <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-[2.5rem] p-16 text-center shadow-sm">
             {/* when no group found */}
-            <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gray-50 flex items-center justify-center text-gray-300">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-gray-300 dark:text-gray-600">
               <Icon path={ICONS.empty} className="size-10" />
             </div>
-            <h3 className="text-xl font-extrabold text-gray-900 mb-2">{search ? 'No groups found' : 'No groups yet'}</h3>
-            <p className="text-gray-400 max-w-xs mx-auto">
+            <h3 className="text-xl font-extrabold text-gray-900 dark:text-white mb-2">{search ? 'No groups found' : 'No groups yet'}</h3>
+            <p className="text-gray-400 dark:text-gray-500 max-w-xs mx-auto">
               {search ? `We couldn't find any groups matching "${search}"` : "Create your first group to start splitting bills with friends."}
             </p>
           </div>
@@ -120,16 +120,16 @@ const GroupsPage = () => {
               <div
                 key={g.id}
                 onClick={() => navigate(`/groups/${g.id}`)}
-                className="bg-white border border-gray-100 rounded-[2.5rem] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group"
+                className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-[2.5rem] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group"
                 style={{ animation: `fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) ${0.15 + i * 0.05}s both` }}
               >
                 {/* when group found */}
                 <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${GROUP_COLORS[i % GROUP_COLORS.length]} flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-500`}>
                   <Icon path={ICONS.groups} className="size-7 text-white" />
                 </div>
-                <h3 className="text-lg font-black text-gray-900 mb-1 group-hover:text-violet-600 transition-colors">{g.name}</h3>
+                <h3 className="text-lg font-black text-gray-900 dark:text-white mb-1 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors uppercase">{g.name}</h3>
                 <div className="flex items-center justify-between mt-auto">
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
                     {g.member_count ?? 0} {(g.member_count ?? 0) === 1 ? 'member' : 'members'}
                   </p>
                   <span className="text-violet-500 opacity-0 group-hover:opacity-100 transition-opacity font-bold text-sm">View Details →</span>
