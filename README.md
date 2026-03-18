@@ -8,12 +8,12 @@
 
 ## Key Features
 
-- ** Intelligent Dashboard**: Gain an instant overview of your net balance, active groups, and recent spending trends.
-- ** Group Collaboration**: Create dedicated spaces for trips, households, or events. Manage members and track shared costs seamlessly.
-- ** Automated Splitting**: Add expenses and let Split-Sync handle the math. Supports equal splits with high financial precision.
-- ** Smart Settlements**: Our internal engine calculates the most efficient way to pay back your peers with minimal transactions.
-- ** Security by Design**: Built with **HttpOnly Cookies** and **JWT** to ensure your session is always safe from XSS attacks.
-- ** Premium UX**: A responsive, modern design system built with **Tailwind CSS 4** and **Plus Jakarta Sans**.
+- Intelligent Dashboard: Gain an instant overview of your net balance, active groups, and recent spending trends.
+- Group Collaboration: Create dedicated spaces for trips, households, or events. Manage members and track shared costs seamlessly.
+- Automated Splitting: Add expenses and let Split-Sync handle the math. Supports equal splits with high financial precision.
+- Smart Settlements: Our internal engine calculates the most efficient way to pay back your peers with minimal transactions.
+- Security by Design: Built with **HttpOnly Cookies** and **JWT** to ensure your session is always safe from XSS attacks.
+- Premium UX: A responsive, modern design system built with **Tailwind CSS 4** and **Plus Jakarta Sans**.
 
 ---
 
