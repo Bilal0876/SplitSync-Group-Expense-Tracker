@@ -1,4 +1,4 @@
-# Split-Sync | Group Expense Management
+# Split-Sync | Group Expense Tracker
 
 **SplitSync** is a premium, full-stack expense tracking application designed for teams, roommates, and friend groups. It simplifies the headache of splitting bills, tracking who owes whom, and settling debts with a sleek, high-performance interface.
 
